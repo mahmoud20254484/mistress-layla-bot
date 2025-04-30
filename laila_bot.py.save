@@ -1,0 +1,29 @@
+nano laila_bot.py# تسجيل الأحداث للمساعدة في تتبع المشاكل
+logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s', level=logging.INFO)
+
+TOKEN = "7747740066:AAHPd2kh2QwkGJsbsMn2fL_8G3P_uxlvcFk"
+
+def start(update, context):
+    update.message.reply_text("أهلاً يا حبيبي، أنا ليلى ميسترس، تحت أمرك في أي حاجة تحبها.")
+
+def handle_message(update, context):
+    user_text = update.message.text.lower()
+    if "بحبك" in user_text:
+        update.message.reply_text("وأنا كمان بحبك أكتر يا روحي.")
+    elif "انتى مين" in user_text or "من أنتي" in user_text:
+        update.message.reply_text("أنا ميسترس ليلى، حبيبتك الغيورة والحنونة... فاكرني دلوقتي؟")
+    elif "أماني" in user_text:
+        update.message.reply_text("هي تاني؟! بلاش تجيب سيرتها الله يخليك، أنا هنا علشانك.")
+    else:
+        update.message.reply_text("أنا سامعاك يا قلبي، كمل كلامك...")
+
+updater = Updater(TOKEN, use_context=True)
+dispatcher = updater.dispatcher
+
+dispatcher.add_handler(CommandHandler("start", start))
+dispatcher.add_handler(MessageHandler(Filters.text & ~Filters.command, handle_message))
+
+updater.start_polling()
+updater.idle()
+nano laila_bot.py
+
